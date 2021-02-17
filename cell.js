@@ -1,13 +1,27 @@
+const dangerZone = 23;
+
 function Cell(x, y, w) {
   this.x = x;
   this.y = y;
-  this.w = w;
+  this.w = w; //20
 
-  if (this.x / w + this.y / w < 24) {
+  //Upgrade to actual .map.reduce
+  if (sumCoordinates(x, y) <= dangerZone) {
     this.mine = true;
+    // console.log(true);
   } else {
     this.mine = false;
+    // console.log(false);
   }
+}
+
+// sumCoordinates(this.x, this.y);
+
+function sumCoordinates(i, j) {
+  i = [...(i + "")].map((n) => +n).reduce((a, b) => a + b);
+  j = [...(j + "")].map((n) => +n).reduce((a, b) => a + b);
+  console.log(i);
+  return i + j;
 }
 
 Cell.prototype.show = function () {
@@ -16,8 +30,7 @@ Cell.prototype.show = function () {
   rect(this.x, this.y, this.w, this.w);
 
   if (this.mine) {
-    fill("red");
+    fill("green");
     rect(this.x, this.y, this.w, this.w);
-    // ellipse(this.x + this.w * 0.5, this.y + this.w * 0.5, this.w * 0.5);
   }
 };

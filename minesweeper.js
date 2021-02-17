@@ -9,10 +9,11 @@ function make2DArray(cols, rows) {
 var grid;
 var cols = 20;
 var rows = 20;
-var w = 20;
+var w = 1;
+// var dangerZone = 50;
 
 function setup() {
-  createCanvas(1001, 1001);
+  createCanvas(4001, 4001);
   cols = floor(width / w);
   rows = floor(height / w);
 
