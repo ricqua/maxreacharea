@@ -7,13 +7,13 @@ function make2DArray(cols, rows) {
 }
 
 var grid;
-var cols = 20;
-var rows = 20;
-var w = 1;
+var cols = 1;
+var rows = 1;
+var w = 20;
 // var dangerZone = 50;
 
 function setup() {
-  createCanvas(4001, 4001);
+  createCanvas(1001, 1001);
   cols = floor(width / w);
   rows = floor(height / w);
 

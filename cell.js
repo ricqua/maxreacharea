@@ -3,19 +3,14 @@ const dangerZone = 23;
 function Cell(x, y, w) {
   this.x = x;
   this.y = y;
-  this.w = w; //20
+  this.w = w;
 
-  //Upgrade to actual .map.reduce
-  if (sumCoordinates(x, y) <= dangerZone) {
-    this.mine = true;
-    // console.log(true);
+  if (sumCoordinates(x, y) >= dangerZone) {
+    this.cellStatus = false;
   } else {
-    this.mine = false;
-    // console.log(false);
+    this.cellStatus = true;
   }
 }
-
-// sumCoordinates(this.x, this.y);
 
 function sumCoordinates(i, j) {
   i = [...(i + "")].map((n) => +n).reduce((a, b) => a + b);
@@ -25,11 +20,13 @@ function sumCoordinates(i, j) {
 }
 
 Cell.prototype.show = function () {
-  stroke(0);
+  // stroke("white");
+  noStroke();
   noFill();
   rect(this.x, this.y, this.w, this.w);
 
-  if (this.mine) {
+  if (this.cellStatus === true) {
+    // stroke("green");
     fill("green");
     rect(this.x, this.y, this.w, this.w);
   }
