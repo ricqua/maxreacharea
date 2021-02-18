@@ -1,22 +1,26 @@
 const dangerZone = 23;
 
-function Cell(x, y, w) {
-  this.x = x;
-  this.y = y;
+function Cell(i, j, w) {
+  this.i = i;
+  this.j = j;
+  this.x = i * w;
+  this.y = j * w;
   this.w = w;
+  this.explored = true;
   this.robot = false;
+  this.reachable = false;
 
-  if (sumCoordinates(x, y) >= dangerZone) {
-    this.cellStatus = false;
+  if (sumCoordinates(this.x, this.y) >= dangerZone) {
+    this.mine = true;
   } else {
-    this.cellStatus = true;
+    this.mine = false;
   }
 }
 
 function sumCoordinates(i, j) {
   i = [...(i + "")].map((n) => +n).reduce((a, b) => a + b);
   j = [...(j + "")].map((n) => +n).reduce((a, b) => a + b);
-  console.log(i);
+  // console.log(i);
   return i + j;
 }
 
@@ -28,25 +32,25 @@ Cell.prototype.maxReachArea = function () {
 };
 
 Cell.prototype.show = function () {
-  // stroke("white");
   noStroke();
   noFill();
   rect(this.x, this.y, this.w, this.w);
-  // fill(0);
-  // textAlign(CENTER);
-  // text(this.x);
 
-  if (this.cellStatus === true) {
-    // stroke("green");
-    fill(120);
+  if (this.explored) {
+    fill(200);
     rect(this.x, this.y, this.w, this.w);
-    if (this.robot) {
-      fill("green");
+    if (!this.mine) {
+      fill(150);
       rect(this.x, this.y, this.w, this.w);
-      // ellipse(this.x + this.w / 2, this.y + this.w / 2, this.w + 0.5);
+      if (this.robot) {
+        fill("blue");
+        rect(this.x, this.y, this.w, this.w);
+        if (this.reachable) {
+          fill("green");
+          rect(this.x, this.y, this.w, this.w);
+        }
+      }
     }
-
-    // fillText("x", this.x / 2, this.y / 2);
   }
 };
 
