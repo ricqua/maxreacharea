@@ -4,7 +4,7 @@ var rows = 20;
 var w = 5;
 
 function setup() {
-  createCanvas(1100, 1100);
+  createCanvas(200, 200); //1100,1100
   cols = floor(width / w);
   rows = floor(height / w);
 
@@ -12,6 +12,11 @@ function setup() {
   for (var i = 0; i < cols; i++) {
     for (var j = 0; j < rows; j++) {
       grid[i][j] = new Cell(i, j, w);
+    }
+  }
+  for (var i = 0; i < cols; i++) {
+    for (var j = 0; j < rows; j++) {
+      grid[i][j].countMines();
     }
   }
 }
