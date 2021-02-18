@@ -4,8 +4,8 @@ var rows = 20;
 var w = 5;
 
 function setup() {
-  createCanvas(300, 300);
-  // createCanvas(1100, 1100);
+  createCanvas(450, 450);
+  // createCanvas(1100, 150);
   cols = floor(width / w);
   rows = floor(height / w);
 

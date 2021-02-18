@@ -1,4 +1,4 @@
-const dangerZone = 23;
+const dangerZone = 17;
 
 function Cell(i, j, w) {
   this.i = i;
@@ -7,7 +7,7 @@ function Cell(i, j, w) {
   this.y = j * w;
   this.w = w;
   this.explored = true;
-  this.robot = false;
+  // this.robot = false;
   this.neighborCount = 0;
   this.reachable = false;
 
@@ -25,13 +25,6 @@ function sumCoordinates(i, j) {
   return i + j;
 }
 
-Cell.prototype.maxReachArea = function () {
-  var countReachable = 0;
-  if (this.cellStatus) {
-    return -1;
-  }
-};
-
 Cell.prototype.show = function () {
   noStroke();
   noFill();
@@ -43,27 +36,14 @@ Cell.prototype.show = function () {
     if (!this.mine) {
       fill(150);
       rect(this.x, this.y, this.w, this.w);
-
-      textAlign(CENTER);
-      textSize(3);
-      fill(0);
-      text(this.neighborCount, this.x + this.w / 2, this.y + this.w - 1);
-      // if (this.neighborCount <= 1) {
-      //   fill("green");
-      //   rect(this.x, this.y, this.w, this.w);
-      // }
+      // textAlign(CENTER);
+      // textSize(3);
+      // fill(0);
+      // text(this.neighborCount, this.x + this.w / 2, this.y + this.w - 1);
       if (this.reachable) {
         fill("green");
         rect(this.x, this.y, this.w, this.w);
       }
-      // if (this.robot) {
-      //   fill("blue");
-      //   rect(this.x, this.y, this.w, this.w);
-      //   // if (this.reachable) {
-      //   //   fill("green");
-      //   //   rect(this.x, this.y, this.w, this.w);
-      //   // }
-      // }
     }
   }
 };
@@ -92,11 +72,13 @@ Cell.prototype.countMines = function () {
     }
     this.neighborCount = total;
   }
+  // this.reachable++;
+  // console.log(this.reachable);
 };
 
 Cell.prototype.reveal = function () {
   this.reachable = true;
-  if (this.neighborCount == 0) {
+  if (this.neighborCount < 8) {
     this.floodFill();
   }
 };
