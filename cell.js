@@ -43,10 +43,15 @@ Cell.prototype.show = function () {
     if (!this.mine) {
       fill(150);
       rect(this.x, this.y, this.w, this.w);
+
       textAlign(CENTER);
       textSize(3);
       fill(0);
       text(this.neighborCount, this.x + this.w / 2, this.y + this.w - 1);
+      if (this.neighborCount <= 1) {
+        fill("green");
+        rect(this.x, this.y, this.w, this.w);
+      }
       if (this.robot) {
         fill("blue");
         rect(this.x, this.y, this.w, this.w);
