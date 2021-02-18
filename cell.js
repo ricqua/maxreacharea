@@ -6,7 +6,6 @@ function Cell(i, j, w) {
   this.x = i * w;
   this.y = j * w;
   this.w = w;
-  this.robot = false;
 
   if (sumCoordinates(x, y) >= dangerZone) {
     this.cellStatus = false;
@@ -22,33 +21,16 @@ function sumCoordinates(i, j) {
   return i + j;
 }
 
-Cell.prototype.maxReachArea = function () {
-  var countReachable = 0;
-  if (this.cellStatus) {
-    return -1;
-  }
-};
-
 Cell.prototype.show = function () {
   // stroke("white");
   noStroke();
   noFill();
   rect(this.x, this.y, this.w, this.w);
-  // fill(0);
-  // textAlign(CENTER);
-  // text(this.x);
 
   if (this.cellStatus === true) {
     // stroke("green");
-    fill(125);
+    fill("green");
     rect(this.x, this.y, this.w, this.w);
-    if (this.robot) {
-      fill("green");
-      rect(this.x, this.y, this.w, this.w);
-      // ellipse(this.x + this.w / 2, this.y + this.w / 2, this.w + 0.5);
-    }
-
-    // fillText("x", this.x / 2, this.y / 2);
   }
 };
 
