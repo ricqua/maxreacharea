@@ -38,7 +38,7 @@ Cell.prototype.show = function () {
 
   if (this.cellStatus === true) {
     // stroke("green");
-    fill(125);
+    fill(120);
     rect(this.x, this.y, this.w, this.w);
     if (this.robot) {
       fill("green");
