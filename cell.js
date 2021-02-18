@@ -6,37 +6,44 @@ function Cell(i, j, w) {
   this.x = i * w;
   this.y = j * w;
   this.w = w;
+  this.explored = true;
+  this.robot = false;
+  this.reachable = false;
 
-  if (sumCoordinates(x, y) >= dangerZone) {
-    this.cellStatus = false;
+  if (sumCoordinates(this.x, this.y) >= dangerZone) {
+    this.mine = true;
   } else {
-    this.cellStatus = true;
+    this.mine = false;
   }
 }
 
 function sumCoordinates(i, j) {
   i = [...(i + "")].map((n) => +n).reduce((a, b) => a + b);
   j = [...(j + "")].map((n) => +n).reduce((a, b) => a + b);
-  console.log(i);
+  // console.log(i);
   return i + j;
 }
 
 Cell.prototype.show = function () {
-  // stroke("white");
   noStroke();
   noFill();
   rect(this.x, this.y, this.w, this.w);
 
-  if (this.cellStatus === true) {
-    // stroke("green");
-    fill("green");
+  if (this.explored) {
+    fill(200);
     rect(this.x, this.y, this.w, this.w);
-  }
-};
-
-Cell.prototype.countMines = function () {
-  if (!this.cellStatus) {
-    return -1;
+    if (!this.mine) {
+      fill(150);
+      rect(this.x, this.y, this.w, this.w);
+      if (this.robot) {
+        fill("blue");
+        rect(this.x, this.y, this.w, this.w);
+        if (this.reachable) {
+          fill("green");
+          rect(this.x, this.y, this.w, this.w);
+        }
+      }
+    }
   }
   var total = 0;
   for (var i = -1; i <= 1; i++) {
